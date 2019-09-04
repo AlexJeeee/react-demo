@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Button,List} from "antd-mobile";
+import {addGun,minusGun,minusGunAsync} from "./index.redux";
 
 class App extends React.Component{
   render() {
@@ -9,10 +11,19 @@ class App extends React.Component{
           <h2>独立团团长{boss}</h2>
           <One boss='张大彪'></One>
           <Knight boss="孙德胜"></Knight>
+          <h2>现有机枪{this.props.num}把</h2>
+          <Button type='primary' onClick={this.props.addGun}>申请武器</Button>
+          <Button type='primary' onClick={this.props.minusGun}>上交武器</Button>
+          <Button type='primary' onClick={this.props.minusGunAsync}>拖两天再给</Button>
         </div>
     )
   }
 }
+const mapStateToProps = (state)=>{
+    return {num:state}
+}
+const actionCreaters = {addGun,minusGun,minusGunAsync};
+App = connect(mapStateToProps,actionCreaters)(App);
 
 function Knight(props) {
   return <h2>骑兵连连长{props.boss},冲啊</h2>

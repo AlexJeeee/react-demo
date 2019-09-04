@@ -18,7 +18,6 @@ const store = createStore(counter,compose(
         (<Provider  store={store}>
             <App />
         </Provider>),
-
         document.getElementById('root')
     );
 

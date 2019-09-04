@@ -3,6 +3,17 @@ import {connect} from 'react-redux';
 import {Button,List} from "antd-mobile";
 import {addGun,minusGun,minusGunAsync} from "./index.redux";
 
+// const mapStateToProps = (state)=>{
+//     return {num:state}
+// };
+// const actionCreaters = {addGun,minusGun,minusGunAsync};
+// App = connect(mapStateToProps,actionCreaters)(App);
+@connect(
+    //你要state什么属性放到props里
+    state=>({num:state}),
+    //你要什么方法，放到props里，自动dispatch
+    {addGun,minusGun,minusGunAsync}
+)
 class App extends React.Component{
   render() {
     const boss = '李云龙';
@@ -19,11 +30,7 @@ class App extends React.Component{
     )
   }
 }
-const mapStateToProps = (state)=>{
-    return {num:state}
-}
-const actionCreaters = {addGun,minusGun,minusGunAsync};
-App = connect(mapStateToProps,actionCreaters)(App);
+
 
 function Knight(props) {
   return <h2>骑兵连连长{props.boss},冲啊</h2>

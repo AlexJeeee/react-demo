@@ -10,7 +10,7 @@ import {addGun,minusGun,minusGunAsync} from "./index.redux";
 // App = connect(mapStateToProps,actionCreaters)(App);
 @connect(
     //你要state什么属性放到props里
-    state=>({num:state}),
+    state=>({num:state.counter}),
     //你要什么方法，放到props里，自动dispatch
     {addGun,minusGun,minusGunAsync}
 )
@@ -45,10 +45,10 @@ class One extends React.Component{
     // this.addSoldier = this.addSoldier.bind(this);
   }
   UNSAFE_componentWillMount() {
-    console.log('将要加载')
+    // console.log('将要加载')
   }
   componentDidMount() {
-    console.log('加载完毕')
+    // console.log('加载完毕')
   }
   addSoldier(){
     console.log('hello');
@@ -57,7 +57,7 @@ class One extends React.Component{
     })
   }
   render() {
-    console.log('正在加载')
+    // console.log('正在加载')
     return (
         <div>
           <h2>一营营长{this.props.boss}</h2>

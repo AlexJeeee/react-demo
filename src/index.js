@@ -3,20 +3,51 @@ import ReactDOM from 'react-dom';
 import {createStore,applyMiddleware,compose} from "redux";
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
-import App from './App';
+import {
+    BrowserRouter,
+    Route,
+    Redirect,
+    Switch
+} from "react-router-dom";
+
+import reducer from './reducer';
+import Auth from './Auth';
+import Dashboard from './Dashboard';
 import * as serviceWorker from './serviceWorker';
-import {counter} from './index.redux'
 
 //create store
-const store = createStore(counter,compose(
+const store = createStore(reducer,compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension():f=>f
     )
     );
 
+// class Test extends React.Component{
+//     constructor(props){
+//         super(props)
+//     }
+//     render() {
+//         console.log(this.props);
+//         return <h2>test {this.props.match.params.location}</h2>
+//     }
+// }
+//登录
+//  没有登录信息统一跳login
+//页面 导航+显示+注销
+//  一营
+//  二营
+//  骑兵连
+//redux+router
     ReactDOM.render(
         (<Provider  store={store}>
-            <App />
+            <BrowserRouter>
+                <Switch>
+                    {/*只渲染命中的第一个route*/}
+                    <Route path='/login' exact component={Auth}></Route>
+                    <Route path='/dashboard' component={Dashboard}></Route>
+                    <Redirect to='/dashboard'></Redirect>
+                </Switch>
+            </BrowserRouter>
         </Provider>),
         document.getElementById('root')
     );

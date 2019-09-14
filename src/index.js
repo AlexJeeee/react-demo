@@ -11,8 +11,11 @@ import {
 } from "react-router-dom";
 
 import reducer from './reducer';
-import Auth from './Auth';
-import Dashboard from './Dashboard';
+import './config'
+import 'antd-mobile/dist/antd-mobile.css'
+import Login from './container/login/login'
+import Register from './container/register/register'
+import AuthRoute from './component/authRoute/authRoute'
 import * as serviceWorker from './serviceWorker';
 
 //create store
@@ -22,31 +25,15 @@ const store = createStore(reducer,compose(
     )
     );
 
-// class Test extends React.Component{
-//     constructor(props){
-//         super(props)
-//     }
-//     render() {
-//         console.log(this.props);
-//         return <h2>test {this.props.match.params.location}</h2>
-//     }
-// }
-//登录
-//  没有登录信息统一跳login
-//页面 导航+显示+注销
-//  一营
-//  二营
-//  骑兵连
 //redux+router
     ReactDOM.render(
         (<Provider  store={store}>
             <BrowserRouter>
-                <Switch>
-                    {/*只渲染命中的第一个route*/}
-                    <Route path='/login' exact component={Auth}></Route>
-                    <Route path='/dashboard' component={Dashboard}></Route>
-                    <Redirect to='/dashboard'></Redirect>
-                </Switch>
+                <div>
+                    <AuthRoute></AuthRoute>
+                    <Route path='/login' component={Login}></Route>
+                    <Route path='/register' component={Register}></Route>
+                </div>
             </BrowserRouter>
         </Provider>),
         document.getElementById('root')
